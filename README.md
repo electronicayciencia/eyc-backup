@@ -5,6 +5,15 @@ Download posts and images to tocal HTML files.
 
 (sorry, some comments in spanish)
 
+External commands
+-----------------
+
+ - xmlstarlet
+ - wget
+ - bash
+
+
+
 
 Parseo del feed
 ---------------
@@ -49,22 +58,10 @@ O, también:
 	  xmlstarlet unesc | \
 	  sed 's/&nbsp;/ /g' > content.html
 
-### Buscar las URL de las imágenes
-
-Las imágenes tienen 2 URL, una reducida como src y la real en el link href.
-
-Las imagenes reducidas (no las queremos para nada, pero son los tags IMG):
-
-	cat content.html | xmlstarlet sel -H -t -v '//img/@src'
-
-Las imágenes a tamaño real desde las reducidas:
-
-	cat content.html | xmlstarlet sel -H -t -v '//img/@src/ancestor::a/@href'
-
 
 ### Buscar los videos
 
-	cat content.html | sed 's/&nbsp;/ /g' | xmlstarlet sel -H -t -v '//iframe[contains(@src, "youtube")]/@src'
+	cat content.html | xmlstarlet sel -H -t -v '//iframe[contains(@src, "youtube")]/@src'
 
 ### De una URL ($url), seleccionar el nombre final
 
@@ -94,6 +91,40 @@ Clases relevantes
     <td class="tr-caption" style="text-align: center;">
 
 
+
+
+Imágenes
+--------
+
+### URL de las imágenes
+
+Las imágenes tienen 2 URL, una reducida como src y la real en el link href.
+
+Las imagenes reducidas (no las queremos para nada, pero son los tags IMG):
+
+	cat content.html | xmlstarlet sel -H -t -v '//img/@src'
+
+Las imágenes a tamaño real desde las reducidas:
+
+	cat content.html | xmlstarlet sel -H -t -v '//img/@src/ancestor::a/@href'
+
+Las imágenes más pequeñas no tienen versión original ni van dentro de un link.
+
+Versión en HTML:
+
+    http://4.bp.blogspot.com/_QF4k-mng6_A/S6eJByqfKZI/AAAAAAAAAAU/PN_WPKeqdz0/s1600-h/Imagen149.jpg
+
+Versión en Imagen original (sin -h):
+
+    http://4.bp.blogspot.com/_QF4k-mng6_A/S6eJByqfKZI/AAAAAAAAAAU/PN_WPKeqdz0/s1600/Imagen149.jpg
+
+
+Cuando se parsea el contenido:
+ - buscar urls dentro de img/src (low res)
+ - descargar
+ - buscar urls dentro de A ancestros de IMG (hi res)
+ - eliminar el -h de los enlaces
+ - descargar (sobrescribir anterior)
 
 
 
