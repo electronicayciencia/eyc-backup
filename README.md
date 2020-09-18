@@ -103,6 +103,11 @@ Clases relevantes
     <td class="tr-caption" style="text-align: center;">
 
 
+Categorías
+----------
+
+    cats=$(cat feed.xml | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v '/atom:feed/atom:entry[atom:id="tag:blogger.com,1999:blog-1915800988134045998.post-3137022925002988466"]/atom:category/@term')
+
 Plantillas
 ----------
 
@@ -161,10 +166,11 @@ Cuando se parsea el contenido:
 TODO
 ----
 
- - Fecha
- - Etiquetas
- - Ecuaciones
- - Código
+ - nombre imagen con espacio en "Tu primer proyecto con DSP" 
+ - estilo Fecha
+ - estilo Etiquetas
+ - estilo Ecuaciones
+ - estilo Código
  - estilo titulo
  - estilo image captions
  - tamaño imágenes

@@ -1,19 +1,23 @@
 #!/bin/bash
 
 # EyC Post Saver. Electronicayciencia 2020-09-18
-
 # Download post and images from my blog
 
+# Yes, it is shell script. Problem?
+
+FEEDFILE=feed.xml
 
 set -e
 
-FEEDFILE=feed.xml
 IMGDIR=img
 TEMPLATEDIR=templates
 WGET_CMD="wget -q"
 
+
 for id in $(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v '//atom:entry/atom:id')
 do
+
+   id="tag:blogger.com,1999:blog-1915800988134045998.post-5815657110057439393"
 
 	# Get the title
 	title=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "/atom:feed/atom:entry[atom:id='$id']/atom:title")
@@ -38,8 +42,18 @@ do
 	# Add title
 	htmltitle="<h3 class='post-title entry-title'>$title</h3>"
 
+	# Add date
+	fecha=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:feed/atom:entry[atom:id='$id']/atom:published")
+	fechafmt=$(date +'%d-%m-%Y' -d $fecha)
+	htmldate="<div class='post-date'>$fechafmt</div>"
+
+	# Add tags (unorderer list)
+	cats=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:feed/atom:entry[atom:id='$id']/atom:category/@term")
+	cats=$(echo $cats | sed 's| |</li><li>|g')
+	htmltags="<div class='post-tags'><ul><li>$cats</li></ul></div>"
+
 	# Mix up
-	html="$header $htmltitle $content $footer"
+	html="$header $htmltitle $htmldate $htmltags $content $footer"
 
 	
 	# Create dirs
@@ -81,11 +95,10 @@ do
 	mv -f "$entrydir/index.wip" "$entrydir/index.html"
 
 
-	exit
 done
 
 
-exit
+
 
 
 
