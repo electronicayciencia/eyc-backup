@@ -11,7 +11,7 @@ External commands
  - xmlstarlet
  - wget
  - bash
-
+ - perl
 
 
 
@@ -67,6 +67,18 @@ O, también:
 
     echo ${url##*/}
 
+### Nombres normalizados
+
+Los extraigo del link alternate:
+
+    cat feed.xml |\
+      xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v \
+	  '/atom:feed/atom:entry/atom:link[@rel="alternate"]/@href'
+
+
+    url=http://electronicayciencia.blogspot.com/2010/03/conversor-usb-rs232.html
+    echo $url | cut -d '/' -f 4- | cut -d '.' -f 1
+	# 2010/03/conversor-usb-rs232
 
 
 Clases relevantes
@@ -90,6 +102,19 @@ Clases relevantes
 
     <td class="tr-caption" style="text-align: center;">
 
+
+Plantillas
+----------
+
+Directorio /templates
+ - /templates/header.html
+ - /templates/footer.html
+
+    header=$(cat templates/header.html)
+    footer=$(cat templates/footer.html)
+    content=$(xmlstarlet unesc < content82.raw)
+
+    html=$(echo "$header $content $footer")
 
 
 
@@ -118,6 +143,10 @@ Versión en Imagen original (sin -h):
 
     http://4.bp.blogspot.com/_QF4k-mng6_A/S6eJByqfKZI/AAAAAAAAAAU/PN_WPKeqdz0/s1600/Imagen149.jpg
 
+Sustituir la fuente de una imagen por la local:
+
+    cat content82.html | xmlstarlet ed -u '//img[contains(@src, "/Imagen149.jpg")]/@src' -v 'img/Imagen149.jpg'
+
 
 Cuando se parsea el contenido:
  - buscar urls dentro de img/src (low res)
@@ -129,8 +158,21 @@ Cuando se parsea el contenido:
 
 
 
+TODO
+----
+
+ - Fecha
+ - Etiquetas
+ - Ecuaciones
+ - Código
+ - estilo titulo
+ - estilo image captions
+ - tamaño imágenes
 
 
+Problemas
+---------
 
+Cuando actualizo el link src de las fotos con xmlstarlet, los tags vacíos no se cierran bien. Algunas veces afecta al formato del texto. Prescindo de xmlstarlet para esta labor y usaré remplazo por rexeps de perl.
 
 
