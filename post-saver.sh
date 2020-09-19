@@ -13,7 +13,7 @@ set -u # check for unbound vas
 MAINFILE=articulo.html
 IMGDIR=img
 TEMPLATEDIR=templates
-WGET_CMD="wget -q"
+WGET_CMD="wget -q -nc"
 
 
 # Sanitize file names:
@@ -97,7 +97,7 @@ do
 
 		echo "    Downloading (low res) $filename_local..."
 
-		# $WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
+		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
 		
 		# replace link (xmlstarlet is far less tolerant)
 		perl -pi -e "s|src=\"[^\"]+/$filename_remote\"|src=\"$IMGDIR/$filename_local\"|g" "$entrydir/$MAINFILE.wip"
@@ -115,7 +115,7 @@ do
 		# take original instead html version (remove -h from /sXXXX-h/ path)
 		url=$(echo $url | sed 's|\(s[0-9]\+\)-h|\1|')
 
-		# $WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
+		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
 
 		# replace link (xmlstarlet is far less tolerant)
 		perl -pi -e "s|href=\"[^\"]+/$filename_remote\"|href=\"$IMGDIR/$filename_local\"|g" "$entrydir/$MAINFILE.wip"
@@ -133,7 +133,6 @@ do
 	# Done replacing. File ready.
 	mv -f "$entrydir/$MAINFILE.wip" "$entrydir/$MAINFILE"
 
-	exit
 
 done
 
