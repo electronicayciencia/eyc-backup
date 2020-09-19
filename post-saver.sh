@@ -8,12 +8,12 @@
 FEEDFILE=feed.xml
 
 set -e # check for errors
-set -u # check for unbound vas
+set -u # check for unbound var
 
 MAINFILE=articulo.html
 IMGDIR=img
 TEMPLATEDIR=templates
-WGET_CMD="wget -q -nc"
+WGET_CMD="wget -q"
 
 
 # Sanitize file names:
@@ -49,6 +49,9 @@ do
 	# Unescape content
 	content=$(echo $rawcontent | xmlstarlet unesc | sed 's/&nbsp;/ /g')
 	htmlcontent="<div class='post-body entry-content'>$content</div>"
+
+	# Correct some content's shit to please xmlstarlet
+	htmlcontent=${htmlcontent//allowfullscreen/allowfullscreen=\"true\"}
 
 	# Add headers and foot
 	header_top=$(cat $TEMPLATEDIR/header_top.html)
@@ -89,23 +92,23 @@ do
 	#   HTML: original file
 	cp "$entrydir/$MAINFILE" "$entrydir/$MAINFILE.wip"
 
-	# Download images (low res)
-	for url in $(cat $entrydir/$MAINFILE | xmlstarlet sel -H -t -v '//img/@src')
+	# Download images (low res) (only blogspot)
+	for url in $(cat $entrydir/$MAINFILE | xmlstarlet sel -H -t -v '//img[contains(@src,"blogspot")]/@src')
 	do
 		filename_remote=${url##*/}
 		filename_local=$(url2file $filename_remote)
 
 		echo "    Downloading (low res) $filename_local..."
 
-		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
+		  $WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
 		
 		# replace link (xmlstarlet is far less tolerant)
 		perl -pi -e "s|src=\"[^\"]+/$filename_remote\"|src=\"$IMGDIR/$filename_local\"|g" "$entrydir/$MAINFILE.wip"
 	done
 
 
-	# Download images (hi res)
-	for url in $(cat $entrydir/$MAINFILE | xmlstarlet sel -H -t -v '//img/@src/ancestor::a/@href')
+	# Download images (hi res) (only blogspot)
+	for url in $(cat $entrydir/$MAINFILE | xmlstarlet sel -H -t -v '//img[contains(@src,"blogspot")]/@src/ancestor::a/@href')
 	do
 		filename_remote=${url##*/}
 		filename_local=$(url2file $filename_remote)
@@ -132,7 +135,6 @@ do
 
 	# Done replacing. File ready.
 	mv -f "$entrydir/$MAINFILE.wip" "$entrydir/$MAINFILE"
-
 
 done
 

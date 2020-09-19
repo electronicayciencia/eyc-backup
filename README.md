@@ -179,7 +179,6 @@ Problemas
 
 Cuando actualizo el link src de las fotos con xmlstarlet, los tags vacíos no se cierran bien. Algunas veces afecta al formato del texto. Prescindo de xmlstarlet para esta labor y usaré remplazo por rexeps de perl.
 
+Imágenes embebidas desde spreadsheet no funcionan. De momento las omitimos.
 
-Un contador radiactivo... de mentira -> problemas imágenes
-Espectroscopía casera con DVD' -> se corta la ejecución
 
