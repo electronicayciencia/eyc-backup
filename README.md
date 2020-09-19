@@ -1,6 +1,8 @@
 EyC Backup Script
 =================
 
+[Ir a listado de artículos del Blog Electronica Y Ciencia](articulos.html)
+
 Download posts and images to tocal HTML files.
 
 (sorry, some comments in spanish)
