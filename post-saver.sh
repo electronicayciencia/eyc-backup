@@ -67,7 +67,7 @@ do
 	# Add tags (unorderer list)
 	cats=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:feed/atom:entry[atom:id='$id']/atom:category/@term")
 	cats=$(echo $cats | sed 's| |</li><li>|g')
-	htmltags="<div class='post-tags'><ul><li>$cats</li></ul></div>"
+	htmltags="<div class='post-labels'><ul><li>$cats</li></ul></div>"
 
 	# Mix up
 	html=""
@@ -76,8 +76,8 @@ do
 	html+=$header_bot
 	html+=$htmltitle
 	html+=$htmldate
-	html+=$htmltags
 	html+=$htmlcontent
+	html+=$htmltags
 	html+=$footer
 
 	
@@ -125,6 +125,9 @@ do
 	# Replace absolute links to other posts with its relative version
 	# Change it if you change domain blog, of local entry directory
 	perl -pi -e "s|https?://electronicayciencia.blogspot.com/(.*?).html|../../../\$1/$MAINFILE|g" "$entrydir/$MAINFILE.wip"
+
+	# Remove fotter feed message
+	perl -pi -e 's|<div[^>]+blogger-post-footer.*</div>||g' "$entrydir/$MAINFILE.wip"
 
 
 	# Done replacing. File ready.

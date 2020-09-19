@@ -166,7 +166,6 @@ Cuando se parsea el contenido:
 TODO
 ----
 
- - titulo html
  - estilo Fecha
  - estilo Etiquetas
  - estilo Ecuaciones
@@ -174,7 +173,6 @@ TODO
  - estilo titulo
  - estilo image captions
  - tamaño imágenes
- - enlaces a electronicayciencia, que sean locales
 
 Problemas
 ---------
