@@ -1,7 +1,9 @@
+[Ir a listado de artículos del Blog Electronica Y Ciencia](articulos.html)
+
+
 EyC Backup Script
 =================
 
-[Ir a listado de artículos del Blog Electronica Y Ciencia](articulos.html)
 
 Download posts and images to tocal HTML files.
 
@@ -185,4 +187,6 @@ Cuando actualizo el link src de las fotos con xmlstarlet, los tags vacíos no se
 
 Imágenes embebidas desde spreadsheet no funcionan. De momento las omitimos.
 
+la-presion-atmosferica-bmp280/articulo.html -> en el código salen ficheros del directorio actual ¿?
+resonancia-mecanica-con-copas-ii/articulo.html -> las imágenes salen más grandes de lo que son en realidad.
 
