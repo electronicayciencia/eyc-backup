@@ -48,13 +48,16 @@ do
 
 	# Unescape content
 	content=$(echo $rawcontent | xmlstarlet unesc | sed 's/&nbsp;/ /g')
-	
+	htmlcontent="<div class='post-body entry-content'>$content</div>"
+
 	# Add headers and foot
-	header=$(cat $TEMPLATEDIR/header.html)
+	header_top=$(cat $TEMPLATEDIR/header_top.html)
+	header_bot=$(cat $TEMPLATEDIR/header_bottom.html)
 	footer=$(cat $TEMPLATEDIR/footer.html)
 
 	# Add title
 	htmltitle="<h3 class='post-title entry-title'>$title</h3>"
+	pagetitle="<title>$title</title>"
 
 	# Add date
 	fecha=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:feed/atom:entry[atom:id='$id']/atom:published")
@@ -67,7 +70,15 @@ do
 	htmltags="<div class='post-tags'><ul><li>$cats</li></ul></div>"
 
 	# Mix up
-	html="$header $htmltitle $htmldate $htmltags $content $footer"
+	html=""
+	html+=$header_top
+	html+=$pagetitle
+	html+=$header_bot
+	html+=$htmltitle
+	html+=$htmldate
+	html+=$htmltags
+	html+=$htmlcontent
+	html+=$footer
 
 	
 	# Write HTML
