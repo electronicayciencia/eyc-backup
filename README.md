@@ -174,7 +174,7 @@ TODO
  - estilo titulo
  - estilo image captions
  - tamaño imágenes
-
+ - enlaces a electronicayciencia, que sean locales
 
 Problemas
 ---------

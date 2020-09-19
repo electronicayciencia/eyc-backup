@@ -14,10 +14,14 @@ TEMPLATEDIR=templates
 WGET_CMD="wget -q"
 
 
+# Sanitize file names:
+# IT%2Bvs%2BITNCP.png -> IT-vs-ITNCP.png
+# Wave_packet_%2528dispersion%2529.gif -> Wave_packet_-dispersion-.gif
+function url2file { echo $* | sed 's/%25/%/g; s/%../-/g'; }
+
+
 for id in $(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v '//atom:entry/atom:id')
 do
-
-   id="tag:blogger.com,1999:blog-1915800988134045998.post-5815657110057439393"
 
 	# Get the title
 	title=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "/atom:feed/atom:entry[atom:id='$id']/atom:title")
@@ -70,38 +74,39 @@ do
 
 	for url in $(cat $entrydir/index.html | xmlstarlet sel -H -t -v '//img/@src')
 	do
-		filename=${url##*/}
-		echo "    Downloading (low res) $filename..."
+		filename_remote=${url##*/}
+		filename_local=$(url2file $filename_remote)
 
-		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename"
-		perl -pi -e "s|src=\"[^\"]+/$filename\"|src=\"$IMGDIR/$filename\"|g" "$entrydir/index.wip"
+		echo "    Downloading (low res) $filename_local..."
+
+		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
+		
+		# replace link (xmlstarlet is far less tolerant)
+		perl -pi -e "s|src=\"[^\"]+/$filename_remote\"|src=\"$IMGDIR/$filename_local\"|g" "$entrydir/index.wip"
 	done
 
 
 	# Download images (hi res)
 	for url in $(cat $entrydir/index.html | xmlstarlet sel -H -t -v '//img/@src/ancestor::a/@href')
 	do
-		filename=${url##*/}
-		echo "    Downloading (hi res)  $filename..."
+		filename_remote=${url##*/}
+		filename_local=$(url2file $filename_remote)
 
-		# take original instead html version
+		echo "    Downloading (hi res)  $filename_local..."
+
+		# take original instead html version (remove -h from /sXXXX-h/ path)
 		url=$(echo $url | sed 's|\(s[0-9]\+\)-h|\1|')
 
-		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename"
-		perl -pi -e "s|href=\"[^\"]+/$filename\"|href=\"$IMGDIR/$filename\"|g" "$entrydir/index.wip"
+		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
+
+		# replace link (xmlstarlet is far less tolerant)
+		perl -pi -e "s|href=\"[^\"]+/$filename_remote\"|href=\"$IMGDIR/$filename_local\"|g" "$entrydir/index.wip"
 	done
 
 
 	mv -f "$entrydir/index.wip" "$entrydir/index.html"
 
-
 done
-
-
-
-
-
-
 
 
 
