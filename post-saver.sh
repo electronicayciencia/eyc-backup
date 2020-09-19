@@ -102,6 +102,7 @@ do
 
 		echo "    Downloading (low res) $filename_local..."
 
+		# Comment this line to reuse downloaded images
 		#$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
 		
 		# replace link (xmlstarlet is far less tolerant)
@@ -120,6 +121,7 @@ do
 		# take original instead html version (remove -h from /sXXXX-h/ path)
 		url=$(echo $url | sed 's|\(s[0-9]\+\)-h|\1|')
 
+		# Comment this line to reuse downloaded images
 		#$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
 
 		# replace link (xmlstarlet is far less tolerant)
@@ -135,12 +137,12 @@ do
 	perl -pi -e 's|<div[^>]+blogger-post-footer.*?</div>||g' "$entrydir/$MAINFILE.wip"
 
 	# Remove images fixed width and heigth
-	perl -pi -e 's/(<img.*?)\s+width[^\s]+\s+(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
-	perl -pi -e 's/(<img.*?)\s+height[^\s]+\s+(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
+	perl -pi -e 's/(<img.*?)\s+width[^\s>]+\s*(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
+	perl -pi -e 's/(<img.*?)\s+height[^\s>]+\s*(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
 	
 	# Remove iframes fixed width and heigth
-	perl -pi -e 's/(<iframe.*?)\s+width[^\s]+\s+(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
-	perl -pi -e 's/(<iframe.*?)\s+height[^\s]+\s+(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
+	perl -pi -e 's/(<iframe.*?)\s+width[^\s>]+\s*(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
+	perl -pi -e 's/(<iframe.*?)\s+height[^\s>]+\s*(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
 
 	# Done replacing. File ready.
 	mv -f "$entrydir/$MAINFILE.wip" "$entrydir/$MAINFILE"
@@ -153,6 +155,9 @@ do
 
 done
 
+echo "Creating index..."
 echo "<div class='index'>$index</div>" > $INDEX
 
+
+echo "All done."
 
