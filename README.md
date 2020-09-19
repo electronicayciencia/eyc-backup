@@ -166,7 +166,7 @@ Cuando se parsea el contenido:
 TODO
 ----
 
- - nombre imagen con espacio en "Tu primer proyecto con DSP" 
+ - titulo html
  - estilo Fecha
  - estilo Etiquetas
  - estilo Ecuaciones

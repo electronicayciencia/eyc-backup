@@ -7,8 +7,10 @@
 
 FEEDFILE=feed.xml
 
-set -e
+set -e # check for errors
+set -u # check for unbound vas
 
+MAINFILE=articulo.html
 IMGDIR=img
 TEMPLATEDIR=templates
 WGET_CMD="wget -q"
@@ -19,6 +21,9 @@ WGET_CMD="wget -q"
 # Wave_packet_%2528dispersion%2529.gif -> Wave_packet_-dispersion-.gif
 function url2file { echo $* | sed 's/%25/%/g; s/%../-/g'; }
 
+# Convert Blog link to local directory
+# http://electronicayciencia.blogspot.com/2018/10/la-presion-atmosferica-bmp280.html -> 2018/10/la-presion-atmosferica-bmp280
+function url2entrydir { echo $* | cut -d '/' -f 4- | cut -d '.' -f 1; }
 
 for id in $(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v '//atom:entry/atom:id')
 do
@@ -29,8 +34,13 @@ do
 
 	# Get entry directory
 	url=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:entry[atom:id='$id']/atom:link[@rel='alternate']/@href")
-	entrydir=$(echo $url | cut -d '/' -f 4- | cut -d '.' -f 1)
-	echo "    Dir: $entrydir"
+	entrydir=$(url2entrydir $url)
+	echo "    Directory: $entrydir"
+
+
+	# Create dirs
+	mkdir -p "$entrydir"
+	mkdir -p "$entrydir/$IMGDIR"
 
 
 	# Get raw content
@@ -60,34 +70,31 @@ do
 	html="$header $htmltitle $htmldate $htmltags $content $footer"
 
 	
-	# Create dirs
-	mkdir -p "$entrydir"
-	mkdir -p "$entrydir/$IMGDIR"
-
-
 	# Write HTML
-	echo $html > "$entrydir/index.html"
+	echo $html > "$entrydir/$MAINFILE"
 
+	# Begin replacing works
+	#   WIP: work in progress
+	#   HTML: original file
+	cp "$entrydir/$MAINFILE" "$entrydir/$MAINFILE.wip"
 
 	# Download images (low res)
-	cp "$entrydir/index.html" "$entrydir/index.wip"
-
-	for url in $(cat $entrydir/index.html | xmlstarlet sel -H -t -v '//img/@src')
+	for url in $(cat $entrydir/$MAINFILE | xmlstarlet sel -H -t -v '//img/@src')
 	do
 		filename_remote=${url##*/}
 		filename_local=$(url2file $filename_remote)
 
 		echo "    Downloading (low res) $filename_local..."
 
-		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
+		# $WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
 		
 		# replace link (xmlstarlet is far less tolerant)
-		perl -pi -e "s|src=\"[^\"]+/$filename_remote\"|src=\"$IMGDIR/$filename_local\"|g" "$entrydir/index.wip"
+		perl -pi -e "s|src=\"[^\"]+/$filename_remote\"|src=\"$IMGDIR/$filename_local\"|g" "$entrydir/$MAINFILE.wip"
 	done
 
 
 	# Download images (hi res)
-	for url in $(cat $entrydir/index.html | xmlstarlet sel -H -t -v '//img/@src/ancestor::a/@href')
+	for url in $(cat $entrydir/$MAINFILE | xmlstarlet sel -H -t -v '//img/@src/ancestor::a/@href')
 	do
 		filename_remote=${url##*/}
 		filename_local=$(url2file $filename_remote)
@@ -97,14 +104,22 @@ do
 		# take original instead html version (remove -h from /sXXXX-h/ path)
 		url=$(echo $url | sed 's|\(s[0-9]\+\)-h|\1|')
 
-		$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
+		# $WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
 
 		# replace link (xmlstarlet is far less tolerant)
-		perl -pi -e "s|href=\"[^\"]+/$filename_remote\"|href=\"$IMGDIR/$filename_local\"|g" "$entrydir/index.wip"
+		perl -pi -e "s|href=\"[^\"]+/$filename_remote\"|href=\"$IMGDIR/$filename_local\"|g" "$entrydir/$MAINFILE.wip"
 	done
 
 
-	mv -f "$entrydir/index.wip" "$entrydir/index.html"
+	# Replace absolute links to other posts with its relative version
+	# Change it if you change domain blog, of local entry directory
+	perl -pi -e "s|https?://electronicayciencia.blogspot.com/(.*?).html|../../../\$1/$MAINFILE|g" "$entrydir/$MAINFILE.wip"
+
+
+	# Done replacing. File ready.
+	mv -f "$entrydir/$MAINFILE.wip" "$entrydir/$MAINFILE"
+
+	exit
 
 done
 
