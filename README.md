@@ -173,6 +173,8 @@ TODO
  - estilo titulo
  - estilo image captions
  - tamaño imágenes
+ - crear indice
+ - añadir imagen y descripción en el indice
 
 Problemas
 ---------
