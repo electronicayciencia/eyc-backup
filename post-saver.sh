@@ -59,8 +59,8 @@ do
 	htmlcontent=${htmlcontent//allowfullscreen>/allowfullscreen=\"true\">}
 
 	# In old posts I wrote k instead em tag. Idkw.
-	htmlcontent=$(echo ${htmlcontent//<k>/<em>})
-	htmlcontent=$(echo ${htmlcontent//<\/k>/<\/em>})
+	htmlcontent=${htmlcontent//<k>/<em>}
+	htmlcontent=${htmlcontent//<\/k>/<\/em>}
 
 
 	# Add headers and foot
@@ -79,7 +79,7 @@ do
 
 	# Add tags (unorderer list)
 	cats=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:feed/atom:entry[atom:id='$id']/atom:category/@term")
-	cats=$(echo $cats | sed 's| |</li><li>|g')
+	cats=$(echo "$cats" | sed 's| |</li><li>|g')
 	htmltags="<div class='post-labels'>Etiquetas: <ul><li>$cats</li></ul></div>"
 
 	# Mix up
@@ -129,7 +129,7 @@ do
 		echo "    Downloading (hi res)  $filename_local..."
 
 		# take original instead html version (remove -h from /sXXXX-h/ path)
-		url=$(echo $url | sed 's|\(s[0-9]\+\)-h|\1|')
+		url=$(echo "$url" | sed 's|\(s[0-9]\+\)-h|\1|')
 
 		# Comment this line to reuse downloaded images
 		#$WGET_CMD "$url" -O "$entrydir/$IMGDIR/$filename_local"
