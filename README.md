@@ -198,13 +198,7 @@ En 2010/05/preamplificador-microfono-electret
   Tag mal interpretado, averiguar quién:
   <b>factor de ruido<factor de="" ruido=""></factor></b>
 
-
-En 2016/12/el-bus-1-wire-bajo-nivel:
-  line 5 column 1244 - Error: <break> is not recognized!
-
-
-En 2019/07/un-contador-radiactivo-de-mentira/articulo.html
-  problemas con la interpolación de un asterisco
+  Está así en el original.
 
 
 

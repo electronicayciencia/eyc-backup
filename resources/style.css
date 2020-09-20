@@ -3,7 +3,7 @@ body {
   font: normal normal 14px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
   color: #222222;
   background: #000000 url(background.jpg) no-repeat fixed top center /* Credit: Dizzo (http://www.istockphoto.com/file_closeup.php?id=351970&platform=blogger) */;
-  padding: 0 5% 5% 5%;
+  padding: 0 10% 5% 10%;
   margin: 0;
 }
 
@@ -38,10 +38,11 @@ h3.post-title, .comments h4 {
     position: relative;
 	text-align: justify
 }
-
+/*
 img {
   max-width: 75%;
 }
+*/
 
 pre {
     color: #2f2f2f;
@@ -93,18 +94,18 @@ pre {
     background-clip: initial;
     background-color: rgb(102, 204, 131);
     _background-image: none;
-	padding: 0.5em;
+	padding: 1.5em 0.5em 0.5em 0.5em;
 	margin: 0;
 }
 
-.Header h1 {
+.header h1 {
     font: normal normal 48px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
     color: #ffffff;
     text-shadow: 1px 2px 3px rgba(0, 0, 0, .2);
 	margin: 0;
 }
 
-.Header h2 {
+.header h2 {
     font-size: 140%;
     color: #ffffff;
 }

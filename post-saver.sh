@@ -156,7 +156,7 @@ do
 
 	# Clean the output
 	# (warnings will arise, ignore non 0 exit status)
-	#tidy -m -config tidy.conf "$entrydir/$MAINFILE.wip" || true FIXME
+	tidy -m -config tidy.conf "$entrydir/$MAINFILE.wip" || true
 
 	# Done replacing. File ready.
 	mv -f "$entrydir/$MAINFILE.wip" "$entrydir/$MAINFILE"
