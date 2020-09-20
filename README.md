@@ -180,6 +180,7 @@ TODO
  - tamaño imágenes
  - crear indice
  - añadir imagen y descripción en el indice
+ - imagen de fondo
 
 Problemas
 ---------

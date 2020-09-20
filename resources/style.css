@@ -1,9 +1,109 @@
+
 body {
-  background-color: lightblue;
+  font: normal normal 14px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
+  color: #222222;
+  background: #000000 url(background.jpg) no-repeat fixed top center /* Credit: Dizzo (http://www.istockphoto.com/file_closeup.php?id=351970&platform=blogger) */;
+  padding: 0 5% 5% 5%;
+  margin: 0;
+}
+
+.post-date {
+    margin: .75em 0 1.5em 0em;
+	text-align: right;
+}
+
+h3.post-title, .comments h4 {
+    font: normal normal 24px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
+    margin: .75em 0 1em 0.0em;
+}
+
+.content-outer {
+    background-color: #eefff0;
+    padding: 1% 2% 2% 2%;
+}
+
+.content-inner {
+    background-color: #eefff0;
+    padding: 2% 2%;
+}
+
+
+
+.post-body {
+    font-size: 110%;
+    line-height: 1.4;
+    position: relative;
+	text-align: justify
 }
 
 img {
   max-width: 75%;
+}
+
+pre {
+    color: #2f2f2f;
+    background-color: #c6d4c7;
+    padding: 0.5em;
+    margin: 0.1em;
+
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0px;
+}
+
+
+.post-body img {
+	max-width: 100%;
+}
+
+.post-body .tr-caption-container {
+    background: #ffffff;
+    color: #222222;
+	max-width: 80%;
+    font-size: 80%;
+    padding: 5px;
+    border: 1px solid #eeeeee;
+    -moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+	margin-bottom: .5em;
+}
+
+
+.post-body table {
+    border-collapse: separate;
+    border-spacing: 2px;
+	display: table;
+    box-sizing: border-box;
+}
+
+.header {
+    background: #66cc83 url(gradients_light.png) repeat-x scroll 0 -400px;
+    background-image: url(gradients_light.png);
+    background-position-x: 0px;
+    background-position-y: -400px;
+    background-size: initial;
+    background-repeat-x: repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: scroll;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(102, 204, 131);
+    _background-image: none;
+	padding: 0.5em;
+	margin: 0;
+}
+
+.Header h1 {
+    font: normal normal 48px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
+    color: #ffffff;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, .2);
+}
+
+.Header h2 {
+    font-size: 140%;
+    color: #ffffff;
 }
 
 /*

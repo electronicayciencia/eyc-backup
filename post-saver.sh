@@ -31,6 +31,8 @@ index=""
 for id in $(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v '//atom:entry/atom:id')
 do
 
+id=tag:blogger.com,1999:blog-1915800988134045998.post-237314674067286486 #FIXME
+
 	# Get the title
 	title=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "/atom:feed/atom:entry[atom:id='$id']/atom:title")
 	echo "Processing '$title'..."
@@ -149,7 +151,7 @@ do
 
 	# Clean the output
 	# (warnings will arise, ignore non 0 exit status)
-	tidy -m -config tidy.conf "$entrydir/$MAINFILE.wip" || true
+	#tidy -m -config tidy.conf "$entrydir/$MAINFILE.wip" || true FIXME
 
 	# Done replacing. File ready.
 	mv -f "$entrydir/$MAINFILE.wip" "$entrydir/$MAINFILE"
@@ -158,7 +160,7 @@ do
 	# Add to the index
 	index+="<p><a class='index-entry' href="$entrydir/$MAINFILE">$title</a></p>"
 
-#	exit
+	exit #FIXME
 
 done
 
