@@ -31,7 +31,7 @@ index=""
 for id in $(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v '//atom:entry/atom:id')
 do
 
-id=tag:blogger.com,1999:blog-1915800988134045998.post-237314674067286486 #FIXME
+#id=tag:blogger.com,1999:blog-1915800988134045998.post-237314674067286486 #FIXME
 
 	# Get the title
 	title=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "/atom:feed/atom:entry[atom:id='$id']/atom:title")
@@ -57,6 +57,11 @@ id=tag:blogger.com,1999:blog-1915800988134045998.post-237314674067286486 #FIXME
 
 	# Correct some content's shit to please xmlstarlet
 	htmlcontent=${htmlcontent//allowfullscreen>/allowfullscreen=\"true\">}
+
+	# In old posts I wrote k instead em tag. Idkw.
+	htmlcontent=$(echo ${htmlcontent//<k>/<em>})
+	htmlcontent=$(echo ${htmlcontent//<\/k>/<\/em>})
+
 
 	# Add headers and foot
 	header_top=$(cat $TEMPLATEDIR/header_top.html)
@@ -160,7 +165,7 @@ id=tag:blogger.com,1999:blog-1915800988134045998.post-237314674067286486 #FIXME
 	# Add to the index
 	index+="<p><a class='index-entry' href="$entrydir/$MAINFILE">$title</a></p>"
 
-	exit #FIXME
+#	exit #FIXME
 
 done
 

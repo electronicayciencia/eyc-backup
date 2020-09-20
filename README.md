@@ -204,5 +204,7 @@ En 2010/07/difraccion-en-un-dvd:
 En 2010/05/preamplificador-microfono-electret
   line 5 column 14481 - Error: <factor> is not recognized!
 
+  <b>factor de ruido<factor de="" ruido=""></factor></b>
+
 En 2016/12/el-bus-1-wire-bajo-nivel:
   line 5 column 1244 - Error: <break> is not recognized!
