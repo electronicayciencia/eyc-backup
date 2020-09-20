@@ -147,6 +147,10 @@ do
 	perl -pi -e 's/(<iframe.*?)\s+width[^\s>]+\s*(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
 	perl -pi -e 's/(<iframe.*?)\s+height[^\s>]+\s*(.*?>)/$1 $2/g' "$entrydir/$MAINFILE.wip"
 
+	# Clean the output
+	# (warnings will arise, ignore non 0 exit status)
+	tidy -m -config tidy.conf "$entrydir/$MAINFILE.wip" || true
+
 	# Done replacing. File ready.
 	mv -f "$entrydir/$MAINFILE.wip" "$entrydir/$MAINFILE"
 

@@ -16,6 +16,7 @@ External commands
  - wget
  - bash
  - perl
+ - tidy
 
 
 
@@ -189,4 +190,18 @@ Imágenes embebidas desde spreadsheet no funcionan. De momento las omitimos.
 
 resonancia-mecanica-con-copas-ii/articulo.html -> las imágenes salen más grandes de lo que son en realidad.
 
+Al hacer el tidy:
+2017/12/describiendo-un-protocolo-desconocido/articulo.html
+"encontramos cadenas como: <em>Se<f1>or@s Buenas\nTardes</f1></em>. La ñ está codificada como f1, es"
+el f1 era literal, no tendría que haberse usado como tag
+Estaba en el original así. Lo corrijo. Falta volver a descargar el feed y verificar.
 
+En 2013/03/la-distorsion-armonica-total-thd:
+En 2010/07/difraccion-en-un-dvd:
+ line 5 column 15645 - Error: <k> is not recognized!
+
+En 2010/05/preamplificador-microfono-electret
+  line 5 column 14481 - Error: <factor> is not recognized!
+
+En 2016/12/el-bus-1-wire-bajo-nivel:
+  line 5 column 1244 - Error: <break> is not recognized!
