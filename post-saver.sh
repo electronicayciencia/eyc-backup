@@ -55,9 +55,6 @@ do
 	content=$(echo "$rawcontent" | xmlstarlet unesc | sed 's/&nbsp;/ /g')
 	htmlcontent="<div class='post-body entry-content'>$content</div>"
 
-	# Format content for legibility (line breaks)
-	htmlcontent=$(echo "$htmlcontent" | perl -pe 's|(<br[\s/]*>)|$1\n|g')
-
 	# Correct some content's shit to please xmlstarlet
 	htmlcontent=${htmlcontent//allowfullscreen>/allowfullscreen=\"true\">}
 
