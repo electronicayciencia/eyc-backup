@@ -30,7 +30,6 @@ index=""
 
 for id in $(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v '//atom:entry/atom:id')
 do
-  id=tag:blogger.com,1999:blog-1915800988134045998.post-5815657110057439393 #FIXME
 
 	# Get the title
 	title=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "/atom:feed/atom:entry[atom:id='$id']/atom:title")
@@ -50,7 +49,6 @@ do
 	# Get raw content
 	rawcontent=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:entry[atom:id='$id']/atom:content")
 
-#echo "$rawcontent" > /tmp/gg #FIXME
 	# Unescape content (double quotes to preserve spaces and newlines)
 	content=$(echo "$rawcontent" | xmlstarlet unesc | sed 's/&nbsp;/ /g')
 	htmlcontent="<div class='post-body entry-content'>$content</div>"
@@ -156,7 +154,7 @@ do
 	# Add to the index
 	index+="<p><a class='index-entry' href="$entrydir/$MAINFILE">$title</a></p>"
 
-	exit # FIXME
+#	exit
 
 done
 
