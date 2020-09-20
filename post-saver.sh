@@ -30,6 +30,8 @@ index=""
 
 for id in $(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v '//atom:entry/atom:id')
 do
+  id=tag:blogger.com,1999:blog-1915800988134045998.post-5815657110057439393 #FIXME
+
 	# Get the title
 	title=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "/atom:feed/atom:entry[atom:id='$id']/atom:title")
 	echo "Processing '$title'..."
@@ -48,9 +50,13 @@ do
 	# Get raw content
 	rawcontent=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:entry[atom:id='$id']/atom:content")
 
-	# Unescape content
-	content=$(echo $rawcontent | xmlstarlet unesc | sed 's/&nbsp;/ /g')
+#echo "$rawcontent" > /tmp/gg #FIXME
+	# Unescape content (double quotes to preserve spaces and newlines)
+	content=$(echo "$rawcontent" | xmlstarlet unesc | sed 's/&nbsp;/ /g')
 	htmlcontent="<div class='post-body entry-content'>$content</div>"
+
+	# Format content for legibility (line breaks)
+	htmlcontent=$(echo "$htmlcontent" | perl -pe 's|(<br[\s/]*>)|$1\n|g')
 
 	# Correct some content's shit to please xmlstarlet
 	htmlcontent=${htmlcontent//allowfullscreen>/allowfullscreen=\"true\">}
@@ -86,8 +92,10 @@ do
 	html+=$footer
 
 	
-	# Write HTML
-	echo $html > "$entrydir/$MAINFILE"
+	# Write HTML 
+	# (double quotes in echo to preserve newlines)
+	# (double quotes in redirection to support spaces in file names)
+	echo "$html" > "$entrydir/$MAINFILE"
 
 	# Begin replacing works
 	#   WIP: work in progress
@@ -151,12 +159,12 @@ do
 	# Add to the index
 	index+="<p><a class='index-entry' href="$entrydir/$MAINFILE">$title</a></p>"
 
-#	exit
+	exit # FIXME
 
 done
 
-echo "Creating index..."
-echo "<div class='index'>$index</div>" > $INDEX
+#echo "Creating index..."
+#echo "<div class='index'>$index</div>" > $INDEX
 
 
 echo "All done."

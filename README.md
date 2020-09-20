@@ -190,3 +190,5 @@ Imágenes embebidas desde spreadsheet no funcionan. De momento las omitimos.
 la-presion-atmosferica-bmp280/articulo.html -> en el código salen ficheros del directorio actual ¿?
 resonancia-mecanica-con-copas-ii/articulo.html -> las imágenes salen más grandes de lo que son en realidad.
 
+El <pre> no sale bien. Se come los espacios.
+
