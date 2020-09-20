@@ -171,14 +171,8 @@ Cuando se parsea el contenido:
 TODO
 ----
 
- - estilo Fecha
  - estilo Etiquetas
- - estilo Ecuaciones
  - estilo Código
- - estilo titulo
- - estilo image captions
- - tamaño imágenes
- - crear indice
  - añadir imagen y descripción en el indice
  - imagen de fondo
 

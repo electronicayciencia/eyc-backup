@@ -79,7 +79,7 @@ do
 
 	# Add tags (unorderer list)
 	cats=$(cat $FEEDFILE | xmlstarlet sel -N atom="http://www.w3.org/2005/Atom" -t -v "//atom:feed/atom:entry[atom:id='$id']/atom:category/@term")
-	cats=$(echo "$cats" | sed 's| |</li><li>|g')
+	cats=$(echo $cats | sed 's| |</li><li>|g') # aaa bbb ccc ...
 	htmltags="<div class='post-labels'>Etiquetas: <ul><li>$cats</li></ul></div>"
 
 	# Mix up
