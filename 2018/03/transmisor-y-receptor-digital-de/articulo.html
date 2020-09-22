@@ -76,7 +76,7 @@ En este artículo quiero centrarme en el receptor, y por esa razón el esquema d
 </tr>
 </tbody>
 </table><br>
-El transductor podría requerir más corriente de la que puede suministrar el PIC, para no arriesgarlo lo excitamos mediante <b>Q1</b> y no directamente, así puedo darle la corriente necesaria sin preocuparme de si será muy alta para el PIC. Otras posibilidades habrían sido una salida push-pull como la que vimos en <a href="http://electronicayciencia.blogspot.com.es/2013/07/etiquetas-antihurto-magneto-acusticas.html">Cómo funcionan las etiquetas acustomagnéticas</a> o un buffer usando inversores.<br>
+El transductor podría requerir más corriente de la que puede suministrar el PIC, para no arriesgarlo lo excitamos mediante <b>Q1</b> y no directamente, así puedo darle la corriente necesaria sin preocuparme de si será muy alta para el PIC. Otras posibilidades habrían sido una salida push-pull como la que vimos en <a href="../../../2013/07/etiquetas-antihurto-magneto-acusticas/articulo.html">Cómo funcionan las etiquetas acustomagnéticas</a> o un buffer usando inversores.<br>
 <br>
 A propósito, cuando queráis excitar un led, un relé o cualquier cosa con un transistor NPN en modo conmutación, siempre emisor a tierra y carga al colector. Nunca al revés.<br>
 <br>
@@ -294,7 +294,7 @@ Para el uso que le vamos a dar, no necesitamos ni precisión, ni fidelidad. Deci
 </table><br>
 La señal captada por el micrófono -o simulada en este caso- alcanza el potenciómetro de volumen <b>POT1</b> y atraviesa dos etapas amplificadoras compuestas por sendos LM358 en cascada. Ambos operacionales están configurados como amplificador inversor con alimentación simple.<br>
 <br>
-La tensión en la patilla no inversora de <b>U1</b> y <b>U2</b> es igual a la mitad de la tensión de alimentación, es decir 2.5V. Esto lo conseguimos con <b>R1</b> y <b>R2</b> que forman la referencia o tierra virtual. El concepto de <em>tierra virtual</em> ya lo vimos en el artículo <a href="http://electronicayciencia.blogspot.com.es/2010/05/preamplificador-microfono-electret.html">Preamplificador micrófono electret: operacional</a>. <b>C1</b> hace las veces de condensador de desacoplo y <b>C2</b> evita auto-oscilaciones.<br>
+La tensión en la patilla no inversora de <b>U1</b> y <b>U2</b> es igual a la mitad de la tensión de alimentación, es decir 2.5V. Esto lo conseguimos con <b>R1</b> y <b>R2</b> que forman la referencia o tierra virtual. El concepto de <em>tierra virtual</em> ya lo vimos en el artículo <a href="../../../2010/05/preamplificador-microfono-electret/articulo.html">Preamplificador micrófono electret: operacional</a>. <b>C1</b> hace las veces de condensador de desacoplo y <b>C2</b> evita auto-oscilaciones.<br>
 <br>
 La primera etapa amplificadora, formada por <b>U1</b>, <b>R3</b> y <b>R4</b>, tiene una ganancia de (en teoría) 22. Si el producto ganancia por ancho de banda es realmente 1MHz y operamos a 40kHz, la ganancia máxima para cada etapa sería de 25. Pero si resulta ser menor, 0.7MHz, entonces la amplificación máxima será, como mucho, de 18 y no de 22 veces.<br>
 <br>
@@ -444,7 +444,7 @@ Probablemente sea preciso afinar los valores de las resistencias. De todas forma
 <br>
 Abandonamos ya la electrónica analógica para sumergirnos en lo digital. Dedicaré unas líneas a describir el software del transmisor del cual os pego aquí la parte relevante. El fichero completo lo tenéis en <a href="https://github.com/electronicayciencia/askrecv/tree/master/TX/c">este github</a>.<br>
 <br>
-Arriba del todo están las funciones de más bajo nivel y al final del archivo la función <em>main</em>. Este estilo se llama <em>bottom-up</em> y ya lo usamos anteriormente en <a href="http://electronicayciencia.blogspot.com.es/2017/02/el-bus-i2c-bajo-nivel.html">El bus I2C a bajo nivel</a> o en <a href="http://electronicayciencia.blogspot.com.es/2016/12/el-bus-1-wire-bajo-nivel.html">El bus 1-Wire a bajo nivel - DS1820</a>. Pero en esta ocasión implementamos un sencillísimo protocolo serie tipo UART.<br>
+Arriba del todo están las funciones de más bajo nivel y al final del archivo la función <em>main</em>. Este estilo se llama <em>bottom-up</em> y ya lo usamos anteriormente en <a href="../../../2017/02/el-bus-i2c-bajo-nivel/articulo.html">El bus I2C a bajo nivel</a> o en <a href="../../../2016/12/el-bus-1-wire-bajo-nivel/articulo.html">El bus 1-Wire a bajo nivel - DS1820</a>. Pero en esta ocasión implementamos un sencillísimo protocolo serie tipo UART.<br>
 <br>
 De arriba a abajo:<br>
 <ul>

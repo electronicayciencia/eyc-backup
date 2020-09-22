@@ -280,7 +280,7 @@ Si utilizais cable de cinta de más de 15cm y la línea de reloj y la de datos s
 </tbody>
 </table>Los sensores de humedad suelen ser inexactos por naturaleza. Un sensor de temperatura se puede calibrar fácilmente poniéndolo en contacto con un líquido a temperatura conocida. Porque los líquidos transmiten muy bien sus propiedades. Un sensor de humedad relativa debe medir y ser calibrado necesariamente en el aire. Y las medidas en el aire no son tan fiables como en un líquido. En el siguiente enlace tenéis una comparativa muy interesante entre diferentes sensores: <a href="https://www.kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html">Compare DHT22, AM2302, AM2320, AM2321, SHT71, HTU21D, Si7021, BME280</a>.<br>
 <br>
-Utilizaremos la librería I2C para Raspberry presentada en <a href="http://electronicayciencia.blogspot.com.es/2017/02/el-bus-i2c-bajo-nivel.html">El bus I2C a bajo nivel</a>. La podéis encontrar en <a href="https://electronicayciencia.github.io/wPi_soft_i2c/">Github</a><br>
+Utilizaremos la librería I2C para Raspberry presentada en <a href="../../../2017/02/el-bus-i2c-bajo-nivel/articulo.html">El bus I2C a bajo nivel</a>. La podéis encontrar en <a href="https://electronicayciencia.github.io/wPi_soft_i2c/">Github</a><br>
 <br>
 Empezaremos haciendo uso de la utilidad i2cli de <a href="https://github.com/electronicayciencia/wPi_soft_i2c">soft_i2c</a>para ver rápidamente cómo interactuar con el integrado. Primeramente, una vez conectado lanzamos un escaneo, vemos si lo detecta y por el camino confirmamos su dirección I2C:<br>
 <br>
@@ -300,14 +300,14 @@ La lectura ha sido 0x69CC, el CRC es AC. Lo primero que debemos hacer es poner l
 A continuación el datasheet nos da una fórmula para convertir la lectura a grados centígrados. El resultado es <a href="https://www.google.es/search?q=-46.85+%2B175.72+*+0x69CC+%2F+2**16">25.77ºC</a>.<br>
 <div class="separator" style="clear: both; text-align: center;">
 <a href="img/conversion_temp.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="153" data-original-width="680" src="img/conversion_temp.png"></a>
-</div>En cuanto al CRC, esta vez no lo voy a comprobar; me fío del resultado. Tenéis una explicación de cómo funciona un CRC en la entrada dedicada a <a href="http://electronicayciencia.blogspot.com.es/2016/12/el-bus-1-wire-bajo-nivel.html">El bus 1-Wire a bajo nivel</a>.<br>
+</div>En cuanto al CRC, esta vez no lo voy a comprobar; me fío del resultado. Tenéis una explicación de cómo funciona un CRC en la entrada dedicada a <a href="../../../2016/12/el-bus-1-wire-bajo-nivel/articulo.html">El bus 1-Wire a bajo nivel</a>.<br>
 <br>
 Para la lectura de la humedad, el proceso es similar. En el datasheet se indica que hay una dependencia entre la humedad relativa y de la temperatura, pero no sólo a nivel termodinámico, sino de tolerancia del propio chip. Nos proporciona un coeficiente de compensación. Las medidas que vamos a usar, sin embargo, durante este estudio no requieren tal precisión.<br>
 <br>
 Una cosa más, los lectores de humedad no son fiables en los extremos. De hecho el datasheet ya nos avisa de que el HTU21D puede operar fuera del rango 5%-95%, pero que las medidas devueltas tienen un error mayor que en el interior del intervalo.<br>
 <br>
 <br>
-Cuando midamos la temperatura del agua lo haremos con una sonda de temperatura en cuyo interior lleva <b>DS18B20</b>. Ya habíamos tratado en detalle estos sensores en la entrada <a href="http://electronicayciencia.blogspot.com.es/2016/12/el-bus-1-wire-bajo-nivel.html">El bus 1-Wire a bajo nivel</a>. A diferencia del antiguo DS1820, el nuevo modelo DS18B20 ya nos da la precisión necesaria sin tener que leer los pulsos restantes. Por lo que la forma de leer el chip se simplifica. Tenéis el datalogger empleado en Github: <a href="https://github.com/electronicayciencia/ds1820/blob/master/ds18b20_logger.c">ds18b20_logger.c</a>.<br>
+Cuando midamos la temperatura del agua lo haremos con una sonda de temperatura en cuyo interior lleva <b>DS18B20</b>. Ya habíamos tratado en detalle estos sensores en la entrada <a href="../../../2016/12/el-bus-1-wire-bajo-nivel/articulo.html">El bus 1-Wire a bajo nivel</a>. A diferencia del antiguo DS1820, el nuevo modelo DS18B20 ya nos da la precisión necesaria sin tener que leer los pulsos restantes. Por lo que la forma de leer el chip se simplifica. Tenéis el datalogger empleado en Github: <a href="https://github.com/electronicayciencia/ds1820/blob/master/ds18b20_logger.c">ds18b20_logger.c</a>.<br>
 <br>
 Eso sí, mientras más largo es el cable, más tiempo de recuperación tenéis que dejar al bus. En nuestro caso, los 2us que habíamos usado en pruebas anteriores no son suficientes y hubo que aumentarlo a 15us para tener una comunicación fiable.<br>
 <br>

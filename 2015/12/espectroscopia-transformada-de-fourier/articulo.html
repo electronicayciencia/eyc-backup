@@ -57,7 +57,7 @@ Espectroscopio antiguo. Usa un prisma para dispersar la luz. <a href="http://ame
 </tbody>
 </table><br>
 <a name='more' id="more"></a><br>
-Los métodos indirectos consisten en obtener la información de todas las frecuencias al mismo tiempo y separar los componentes con ayuda de un ordenador. Y casi siempre implican una Transformada de Fourier. Un método indirecto sería, como hacemos habitualmente para descomponer sonido, registrar la señal durante un tiempo y después aplicar una FFT para obtener el espectro. Si lo anterior te ha sonado a miedo, te interesará esta otra entrada: <a href="http://www.electronicayciencia.blogspot.com.es/2011/08/la-transformada-de-fourier-no-es-magia.html">La Transformada de Fourier no es magia</a><br>
+Los métodos indirectos consisten en obtener la información de todas las frecuencias al mismo tiempo y separar los componentes con ayuda de un ordenador. Y casi siempre implican una Transformada de Fourier. Un método indirecto sería, como hacemos habitualmente para descomponer sonido, registrar la señal durante un tiempo y después aplicar una FFT para obtener el espectro. Si lo anterior te ha sonado a miedo, te interesará esta otra entrada: <a href="../../../2011/08/la-transformada-de-fourier-no-es-magia/articulo.html">La Transformada de Fourier no es magia</a><br>
 <br>
 <br>
 El artículo lo voy a dedicar a este otro método; pero antes, es necesario repasar algunos conceptos básicos sobre ondas.<br>
@@ -231,7 +231,7 @@ En lugar de un interferómetro de Michelson, que es poco práctico para ondas so
 </tr>
 </tbody>
 </table><br>
-Se trata de un tubo de aproximadamente un metro de longitud. En un extremo he acoplado un altavoz y un micrófono. Y en el otro, un pistón. El pistón va conectado a un hilo que pasa por el rodillo de un ratón que me servirá como sensor de desplazamiento, tal como habíamos visto en la entrada anterior llamada <i><a href="http://electronicayciencia.blogspot.com.es/2015/07/medir-distancias-con-un-raton-de-bola.html">Medir distancias con un ratón de bola</a></i>.<br>
+Se trata de un tubo de aproximadamente un metro de longitud. En un extremo he acoplado un altavoz y un micrófono. Y en el otro, un pistón. El pistón va conectado a un hilo que pasa por el rodillo de un ratón que me servirá como sensor de desplazamiento, tal como habíamos visto en la entrada anterior llamada <i><a href="../../../2015/07/medir-distancias-con-un-raton-de-bola/articulo.html">Medir distancias con un ratón de bola</a></i>.<br>
 <br>
 Ya se puede intuir que instrumento no es de precisión, pero servirá. El funcionamiento es sencillo: por el altavoz generamos un tono, que será nuestra fuente. La onda viaja por el interior del tubo, rebota en el émbolo y vuelve hacia el micrófono. En la posición del micrófono se superpondrán dos ondas: la onda incidente que viene del altavoz justo detrás, y la onda reflejada que ha viajado por el tubo una cierta distancia y ha vuelto. Cuando el sonido de vuelta esté en fase con el que sale del altavoz, habrá una interferencia constructiva y el volumen captado por el micrófono será máximo. Si las ondas incidente y reflejada están en oposición de fase, se anularán y la presión sonora será mucho menor.<br>
 <br>
@@ -274,7 +274,7 @@ Es un bucle que se ejecuta cada 0.5 milisegundos y comprueba si la variable <b>Y
 <br>
 Además se dejan 200 ticks de margen al inicio. Y se detiene la ejecución en cuanto se detecta que los ticks bajan en lugar de subir. Este paso es muy importante, debido a que el registro debe ser una sucesión siempre creciente para cuando luego interpolemos.<br>
 <br>
-Hay otros dos hilos. Un primer hilo va leyendo las posiciones del ratón y mantiene actualizada la variable <i>desplazamiento</i>, <b>$Y</b>. Este proceso ya lo explicamos con detalle en la entrada anterior <a href="http://electronicayciencia.blogspot.com.es/2015/07/medir-distancias-con-un-raton-de-bola.html">Medir distancias con un ratón de bola</a>:<br>
+Hay otros dos hilos. Un primer hilo va leyendo las posiciones del ratón y mantiene actualizada la variable <i>desplazamiento</i>, <b>$Y</b>. Este proceso ya lo explicamos con detalle en la entrada anterior <a href="../../../2015/07/medir-distancias-con-un-raton-de-bola/articulo.html">Medir distancias con un ratón de bola</a>:<br>
 <br>
 <pre class="cpp" name="code">sub update_mouse_loop {<br> my $options  = shift;<br> my $polltime = 0.0005; # segundoss,  intervalo entre lecturas del ratón<br> my $EV_REL   = 0x02;<br> my $REL_Y    = 0x01;<br><br> my $device = Linux::Input-&gt;new("/dev/input/event" . $options-&gt;{id_event});<br><br> while (1) {<br>  foreach my $ev ($device-&gt;poll($polltime)) {<br>   $ev-&gt;{type} == $EV_REL and $ev-&gt;{code} == $REL_Y and $Y += $ev-&gt;{value};<br>  }<br> }<br>}<br></pre><br>
 Y un segundo hilo que va registrando el volumen y mantiene actualizada la variable <i>volumen</i>, <b>$S</b>.<br>
@@ -420,7 +420,7 @@ Por ejemplo en este caso mezclamos 4kHz y 11kHz? Esperamos ver dos picos de 4 y 
 </tr>
 </tbody>
 </table><br>
-Ya habíamos visto en esta otra entrada lo que pasa al introducir dos frecuencias en un sistema no lineal: <a href="http://electronicayciencia.blogspot.com.es/2013/03/la-distorsion-armonica-total-thd.html">La Distorsión Armónica Total (THD)</a>. Y lo podemos observar de nuevo en este resultado.<br>
+Ya habíamos visto en esta otra entrada lo que pasa al introducir dos frecuencias en un sistema no lineal: <a href="../../../2013/03/la-distorsion-armonica-total-thd/articulo.html">La Distorsión Armónica Total (THD)</a>. Y lo podemos observar de nuevo en este resultado.<br>
 <br>
 Están presentes:<br>
 <ul>

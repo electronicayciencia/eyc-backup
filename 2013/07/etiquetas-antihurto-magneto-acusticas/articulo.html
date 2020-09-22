@@ -95,10 +95,10 @@ El límite de audición llega hasta 20kHz por lo que la frecuencia de 58kHz es u
 No es la primera vez que hablamos en este blog de fenómenos de resonancia. Por favor, leed estas dos entradas si no lo habéis hecho para tener presente un ejemplo más cercano y muy visual de lo que vamos a hacer a continuación:<br>
 <ul>
 <li>
-<a href="http://electronicayciencia.blogspot.com.es/2010/04/espectroscopia-casera-con-copas.html">Espectroscopía casera con copas</a>
+<a href="../../../2010/04/espectroscopia-casera-con-copas/articulo.html">Espectroscopía casera con copas</a>
 </li>
 <li>
-<a href="http://electronicayciencia.blogspot.com.es/2010/08/resonancia-mecanica-con-copas-ii.html">Resonancia mecánica con copas II</a><br>
+<a href="../../../2010/08/resonancia-mecanica-con-copas-ii/articulo.html">Resonancia mecánica con copas II</a><br>
 </li>
 </ul>En estas dos entradas empleábamos sonido audible, y copas normales. Lo que viene después es exactamente el mismo fenómeno pero con campos magnéticos y frecuencias ultrasónicas. Parece muy abstracto, pero en realidad es algo muy típico.<br>
 <br>
@@ -147,7 +147,7 @@ Esos parámetros nos proporcionan 6kHz de ancho de banda para variar la frecuenc
 </div><br>
 Siguiente punto, el grosor del hilo. Lo más sencillo y más fácil de conseguir es hilo de cobre finito. Pero, <b>segundo error</b> ¡no demasiado fino! Un hilo demasiado fino presentará mucha resistencia, y bajará el factor Q por debajo del límite de oscilación. O sea, la bobina tendrá tanta resistencia que en menos de un ciclo toda la energía que pudiera almacenar el condensador se disipará en calor. En Wikipedia hay una tabla de resistividad frente a sección: <a href="https://es.wikipedia.org/wiki/Calibre_de_alambre_estadounidense">Calibre de alambre estadounidense</a><br>
 <br>
-Para terminar de complicar los cálculos, la resistencia influye también en la frecuencia central. De esto ya habíamos hablado antes en <a href="http://electronicayciencia.blogspot.com.es/2011/05/el-circuito-rlc-serie-oscilaciones.html">El circuito RLC serie: oscilaciones amortiguadas</a>. Aquí podemos ver para una frecuencia, capacidad y resistenca del bobinado cuál debe ser la inductancia teórica (sin amortiguamiento) y cuál debe ser teniendo en cuenta este.<br>
+Para terminar de complicar los cálculos, la resistencia influye también en la frecuencia central. De esto ya habíamos hablado antes en <a href="../../../2011/05/el-circuito-rlc-serie-oscilaciones/articulo.html">El circuito RLC serie: oscilaciones amortiguadas</a>. Aquí podemos ver para una frecuencia, capacidad y resistenca del bobinado cuál debe ser la inductancia teórica (sin amortiguamiento) y cuál debe ser teniendo en cuenta este.<br>
 <br>
 <div class="separator" style="clear: both; text-align: center;">
 <a href="img/excel_rlc_wd.PNG" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="img/excel_rlc_wd.PNG"></a>
@@ -198,7 +198,7 @@ La función del diodo zener D5 es precisamente cortar toda tensión en bornes de
 <div class="separator" style="clear: both; text-align: center;">
 <a href="img/con_zener.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="img/con_zener.jpg"></a>
 </div><br>
-Para ser sincero, no es la mejor solución. Si quisiéramos frenar el circuito en el menor tiempo posible tendríamos que recurrir al amortiguamiento crítico. Para más información leed esta entrada: <a href="http://electronicayciencia.blogspot.com.es/2011/05/el-circuito-rlc-serie-oscilaciones.html">El circuito RLC serie: oscilaciones amortiguadas</a><br>
+Para ser sincero, no es la mejor solución. Si quisiéramos frenar el circuito en el menor tiempo posible tendríamos que recurrir al amortiguamiento crítico. Para más información leed esta entrada: <a href="../../../2011/05/el-circuito-rlc-serie-oscilaciones/articulo.html">El circuito RLC serie: oscilaciones amortiguadas</a><br>
 <br>
 Aquí tenéis una foto de la placa ya terminada. Al final del artículo os incluyo los esquemas en formato Eagle 5.11.<br>
 <br>
@@ -211,7 +211,7 @@ Aquí tenéis una foto de la placa ya terminada. Al final del artículo os inclu
 <br>
 En cuanto a la recepción, ya hemos dicho que quiero ver la señal de 58kHz en el PC para trabajar con ella después. Ya me gustaría tener una tarjeta de adquisición de datos, pero he de conformarme con la tarjeta de sonido que a duras penas alcanza los 20kHz.<br>
 <br>
-Afortunadamente ya teníamos listo el circuito que necesitamos: el <b>mezclador de frecuencias</b> <i>(parezco Doraemon)</i> que hicimos en la entrada anterior <a href="http://electronicayciencia.blogspot.com.es/2013/04/mezclador-de-frecuencias-con-el.html">Mezclador de frecuencias con el integrado 4066</a>. Este dispositivo nos permitirá transformar la señal de 58kHz, rebajando su frecuencia hasta convertirla en audible dentro de los márgenes de nuestra tarjeta de sonido.<br>
+Afortunadamente ya teníamos listo el circuito que necesitamos: el <b>mezclador de frecuencias</b> <i>(parezco Doraemon)</i> que hicimos en la entrada anterior <a href="../../../2013/04/mezclador-de-frecuencias-con-el/articulo.html">Mezclador de frecuencias con el integrado 4066</a>. Este dispositivo nos permitirá transformar la señal de 58kHz, rebajando su frecuencia hasta convertirla en audible dentro de los márgenes de nuestra tarjeta de sonido.<br>
 <br>
 Como antena utilizaremos otra bobina similar a la primera. Esta ya no es crítica, porque en la entrada del receptor no vamos a adaptar impedancias. No nos importa por esta vez sacrificar parte de la recepción.<br>
 <br>
@@ -250,7 +250,7 @@ Así que giramos lentamente el trimmer hasta que el eco sea máximo:<br>
 <div class="separator" style="clear: both; text-align: center;">
 <a href="img/pulsocon.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="img/pulsocon.jpg"></a>
 </div><br>
-¡Esto está mejor! Es un efecto muy vistoso cómo los pulsos se prolongan al pasar con una etiqueta activada y sólo cuando está activada. Cuando el efecto es máximo la onda pulsante acaba por convertirse en continua. Exactamente igual que ocurría en la entrada <a href="http://electronicayciencia.blogspot.com.es/2010/04/espectroscopia-casera-con-copas.html">Espectroscopía casera con copas</a><br>
+¡Esto está mejor! Es un efecto muy vistoso cómo los pulsos se prolongan al pasar con una etiqueta activada y sólo cuando está activada. Cuando el efecto es máximo la onda pulsante acaba por convertirse en continua. Exactamente igual que ocurría en la entrada <a href="../../../2010/04/espectroscopia-casera-con-copas/articulo.html">Espectroscopía casera con copas</a><br>
 <br>
 <div class="separator" style="clear: both; text-align: center;">
 <a href="img/sin_y_con.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="img/sin_y_con.png"></a>

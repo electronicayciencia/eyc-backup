@@ -141,7 +141,7 @@ do
 
 	# Replace absolute links to other posts with its relative version
 	# Change it if you change domain blog, of local entry directory
-	perl -pi -e "s|https?://electronicayciencia.blogspot.com/(.*?).html|../../../\$1/$MAINFILE|g" "$entrydir/$MAINFILE.wip"
+	perl -pi -e "s|https?://(?:www\.)?electronicayciencia.blogspot.com(?:\.\w+)?/(.*?).html|../../../\$1/$MAINFILE|g" "$entrydir/$MAINFILE.wip"
 
 	# Remove footer feed message
 	perl -pi -e 's|<div[^>]+blogger-post-footer.*?</div>||g' "$entrydir/$MAINFILE.wip"
@@ -163,14 +163,14 @@ do
 
 
 	# Add to the index
-	index+="<p><a class='index-entry' href="$entrydir/$MAINFILE">$title</a></p>"
+	index+=" * [$title]($entrydir/$MAINFILE)\n"
 
 #	exit #FIXME
 
 done
 
 #echo "Creating index..."
-#echo "<div class='index'>$index</div>" > $INDEX
+#echo -e "Indice:\n$index" > $INDEX
 
 
 echo "All done."
