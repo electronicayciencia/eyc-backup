@@ -122,7 +122,7 @@ Script de backup
 
 [Repositorio](https://github.com/electronicayciencia/eyc-backup)
 
-[Notas del desarrollo](https://github.com/electronicayciencia/eyc-backup/notas.md)
+[Notas del desarrollo](notas.md)
 
 
 

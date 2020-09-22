@@ -1,4 +1,5 @@
-[Ir a listado de artículos del Blog Electronica Y Ciencia](https://electronicayciencia.github.io/eyc-backup/articulos.html)
+
+[Ir a listado de artículos del Blog Electronica Y Ciencia](https://electronicayciencia.github.io/eyc-backup/)
 
 
 EyC Backup Script
