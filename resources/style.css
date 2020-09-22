@@ -1,9 +1,15 @@
+html {
+  text-align: -webkit-center;
+}
+
 body {
   font: normal normal 14px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
   color: #222222;
   background: #000000 url(background.jpg) no-repeat fixed top center /* Credit: Dizzo (http://www.istockphoto.com/file_closeup.php?id=351970&platform=blogger) */;
-  padding: 0 10% 5% 10%;
+  /* padding: 0 10% 5% 10%; */
+  max-width: 1024px;
   margin: 0;
+  text-align: -webkit-left;
 }
 
 
